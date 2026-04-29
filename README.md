@@ -27,7 +27,7 @@ GZLZ is an advanced GPU-accelerated toolkit designed specifically for efficient 
 
 ```bash
 # Clone and build
-git clone https://github.com/yourusername/GPU_LZ.git
+git clone git@github.com:AaronHong1024/GPU_LZ.git
 cd GPU_LZ
 mkdir build && cd build
 cmake .. -DCMAKE_BUILD_TYPE=Release
@@ -45,7 +45,7 @@ cmake --build . -j$(nproc)
 
 ## Key Highlights
 
-* **Optimized GPU Algorithms:** Achieves superior speed over traditional CPU libraries and superiour memory efficiency over existing GPU libraries.
+* **Optimized GPU Algorithms:** Achieves superior speed over traditional CPU libraries and superior memory efficiency over existing GPU libraries.
 * **Tailored for Bioinformatics:** Specifically optimized for massive genomic datasets.
 * **Memory-Efficient Compression:** Stream-based processing suitable for extremely large datasets.
 
