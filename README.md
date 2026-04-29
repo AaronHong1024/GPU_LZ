@@ -4,8 +4,44 @@
 [![libCUBWT](https://img.shields.io/badge/libCUBWT-GPU--BWT-blue.svg)](https://github.com/kobolabs/libcubwt)
 [![SDSL-lite](https://img.shields.io/badge/SDSL--lite-succinct--data--structures-lightgrey.svg)](https://github.com/simongog/sdsl-lite)
 
+> **Original Implementation by Aaron Hong**
 
 GZLZ is an advanced GPU-accelerated toolkit designed specifically for efficient suffix array (SA) construction and LZ77 compression algorithms. Leveraging cutting-edge CUDA implementations, GZLZ significantly enhances speed and memory efficiency, making it ideal for bioinformatics and large-scale data compression tasks.
+
+---
+
+## Table of Contents
+
+- [Quick Start](#quick-start)
+- [Key Highlights](#key-highlights)
+- [Performance Benchmarks](#performance-benchmarks)
+- [Understanding the Algorithms](#understanding-the-algorithms)
+- [Dependencies](#dependencies)
+- [Build Instructions](#build-instructions)
+- [Usage](#usage)
+- [License](#license)
+
+---
+
+## Quick Start
+
+```bash
+# Clone and build
+git clone https://github.com/yourusername/GPU_LZ.git
+cd GPU_LZ
+mkdir build && cd build
+cmake .. -DCMAKE_BUILD_TYPE=Release
+cmake --build . -j$(nproc)
+
+# Run suffix array profiling
+./sa_profiler <input_file>
+
+# Run LZ77 compression
+./lz77 <input_file>
+
+# Run tests
+ctest --output-on-failure
+```
 
 ---
 
@@ -164,6 +200,126 @@ $$
 pie title GPU Memory Usage (32× Dataset)
 "GZLZ GPU" : 29
 "libCUBWT GPU" : 55
+```
+
+---
+
+## Dependencies
+
+### System Requirements
+
+- **CUDA Toolkit**: Version 11.0 or higher
+- **CMake**: Version 3.18 or higher
+- **C++ Compiler**: Supporting C++17 standard
+- **NVIDIA GPU**: Compute Capability 8.0+ (Ampere or newer recommended)
+  - Tested on: A100 (80 GB VRAM)
+  - Supported architectures: SM 80, 86, 90
+
+### Automatic Dependencies (via CMake FetchContent)
+
+The following libraries are automatically downloaded and built during CMake configuration:
+
+- **[libdivsufsort](https://github.com/simongog/libdivsufsort)** (v2.0.1) — Suffix array construction library
+- **[libsais](https://github.com/IlyaGrebnov/libsais)** (v2.8.6) — Fast linear-time suffix array construction
+- **[SDSL-lite](https://github.com/simongog/sdsl-lite)** (v2.1.1) — Succinct data structure library
+- **[CLI11](https://github.com/CLIUtils/CLI11)** (v1.9.0) — Command line parser
+- **[malloc_count](https://github.com/bingmann/malloc_count)** (v0.7.1) — Memory profiling
+- **[spdlog](https://github.com/gabime/spdlog)** (v1.15.0) — Async logging library
+- **[Catch2](https://github.com/catchorg/Catch2)** (v3.6.0) — Unit testing framework
+
+### Optional Dependencies
+
+- **OpenMP**: For parallel CPU suffix array construction (recommended)
+
+---
+
+## Build Instructions
+
+### 1. Clone the Repository
+
+```bash
+git clone https://github.com/yourusername/GPU_LZ.git
+cd GPU_LZ
+```
+
+### 2. Create Build Directory
+
+```bash
+mkdir build
+cd build
+```
+
+### 3. Configure with CMake
+
+```bash
+cmake .. -DCMAKE_BUILD_TYPE=Release
+```
+
+**Build Types:**
+- `Release`: Optimized build with `-O3` flag (recommended for benchmarks)
+- `Debug`: Debug symbols with `-g -G -O0` flags
+
+### 4. Build the Project
+
+```bash
+cmake --build . -j$(nproc)
+```
+
+This will create three executables:
+- **`sa_profiler`** — Suffix array construction profiling tool
+- **`lz77`** — LZ77 compression tool
+- **`tests`** — Unit test suite
+
+### 5. Run Tests (Optional)
+
+```bash
+ctest --output-on-failure
+```
+
+---
+
+## Usage
+
+### Suffix Array Profiling
+
+Profile GPU suffix array construction on your input file:
+
+```bash
+./sa_profiler <input_file>
+```
+
+**Example:**
+```bash
+./sa_profiler ../data/genome.fasta
+```
+
+**Output:**
+- Profiling summary with detailed timing breakdown
+- Initialization, sorting, kernel execution times
+- Memory usage statistics
+
+### LZ77 Compression
+
+Compress data using GPU-accelerated LZ77:
+
+```bash
+./lz77 <input_file>
+```
+
+**Example:**
+```bash
+./lz77 ../data/genome.fasta
+```
+
+**Features:**
+- Automatic GPU/CPU mode selection based on available memory
+- Streaming mode for files exceeding GPU VRAM
+- Detailed compression statistics and timing
+
+### Running Unit Tests
+
+```bash
+./tests
 ```
 
 ---
