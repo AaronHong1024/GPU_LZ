@@ -4,7 +4,7 @@
 [![libCUBWT](https://img.shields.io/badge/libCUBWT-GPU--BWT-blue.svg)](https://github.com/kobolabs/libcubwt)
 [![SDSL-lite](https://img.shields.io/badge/SDSL--lite-succinct--data--structures-lightgrey.svg)](https://github.com/simongog/sdsl-lite)
 
-> **Original Implementation by Aaron Hong**
+> **Primary implementation and system design by Aaron Hong.**
 
 GZLZ is an advanced GPU-accelerated toolkit designed specifically for efficient suffix array (SA) construction and LZ77 compression algorithms. Leveraging cutting-edge CUDA implementations, GZLZ significantly enhances speed and memory efficiency, making it ideal for bioinformatics and large-scale data compression tasks.
 
