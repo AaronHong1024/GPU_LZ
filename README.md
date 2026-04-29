@@ -39,8 +39,6 @@ cmake --build . -j$(nproc)
 # Run LZ77 compression
 ./lz77 <input_file>
 
-# Run tests
-ctest --output-on-failure
 ```
 
 ---
@@ -269,12 +267,6 @@ This will create three executables:
 - **`sa_profiler`** — Suffix array construction profiling tool
 - **`lz77`** — LZ77 compression tool
 - **`tests`** — Unit test suite
-
-### 5. Run Tests (Optional)
-
-```bash
-ctest --output-on-failure
-```
 
 ---
 
